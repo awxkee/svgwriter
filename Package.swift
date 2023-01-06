@@ -4,25 +4,30 @@
 import PackageDescription
 
 let package = Package(
-    name: "svg-writer",
+    name: "svgwriter",
+    platforms: [.iOS(.v14), .macOS(.v12), .macCatalyst(.v14)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "svg-writer",
-            targets: ["svg-writer"]),
+            name: "svgwriter",
+            targets: ["svgwriter"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/awxkee/pngquant.swift.git", "1.0.0"..<"2.0.0"),
+        .package(url: "https://github.com/awxkee/mozjpeg.swift.git", "1.0.0"..<"2.0.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "svg-writer",
-            dependencies: []),
+            name: "svgwriter",
+            dependencies: ["svgwriterc"]),
+        .target(name: "svgwriterc",
+                dependencies: [.product(name: "pngquant", package: "pngquant.swift"),
+                               .product(name: "mozjpeg", package: "mozjpeg.swift")],
+                publicHeadersPath: ".",
+                cSettings: [.define("NO_PAINTER_GL"), .define("PUGIXML_NO_EXCEPTIONS"), .define("PUGIXML_NO_XPATH"), .define("NO_MINIZ")],
+                cxxSettings: [.define("NO_PAINTER_GL"), .define("PUGIXML_NO_EXCEPTIONS"), .define("PUGIXML_NO_XPATH"), .define("NO_MINIZ"), .headerSearchPath(".")]),
         .testTarget(
             name: "svg-writerTests",
-            dependencies: ["svg-writer"]),
-    ]
+            dependencies: ["svgwriter"]),
+    ],
+    cxxLanguageStandard: .cxx17
 )

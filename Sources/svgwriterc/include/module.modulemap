@@ -1,0 +1,4 @@
+module svgwriterc {
+    header "CSvgWriter.h"
+    link "c++"
+}
