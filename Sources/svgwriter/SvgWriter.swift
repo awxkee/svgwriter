@@ -43,7 +43,7 @@ public struct SvgWriter {
     }
 
     public static func encodeJPG(image: PlatformImage) throws -> Data {
-        let jpegData = try image.mozjpegRepresentation(quality: 0.8, progressive: false, premultiply: true)
+        let jpegData = try image.mozjpegRepresentation(quality: 0.8, progressive: false)
         return try CSvgWriter.createSVG(jpegData)
     }
 

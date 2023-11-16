@@ -12,8 +12,8 @@ let package = Package(
             targets: ["svgwriter"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/awxkee/pngquant.swift.git", "1.0.0"..<"2.0.0"),
-        .package(url: "https://github.com/awxkee/mozjpeg.swift.git", "1.0.0"..<"2.0.0")
+        .package(url: "https://github.com/awxkee/pngquant.swift.git", "1.0.0"..<"1.1.0"),
+        .package(url: "https://github.com/awxkee/mozjpeg.swift.git", "1.1.0"..<"1.2.0")
     ],
     targets: [
         .target(
